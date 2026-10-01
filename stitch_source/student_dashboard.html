@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f8f9ff;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface": "#0b1c30", "primary-fixed": "#dae2fd", "inverse-primary": "#bec6e0", "secondary-container": "#fe6b00", "surface-container-low": "#eff4ff", "on-secondary-fixed": "#351000", "inverse-surface": "#213145", "background": "#f8f9ff", "on-tertiary-fixed": "#2a1700", "on-secondary-fixed-variant": "#7a3000", "surface-variant": "#d3e4fe", "on-secondary": "#ffffff", "on-tertiary-fixed-variant": "#653e00", "error": "#ba1a1a", "secondary-fixed-dim": "#ffb693", "on-background": "#0b1c30", "inverse-on-surface": "#eaf1ff", "on-secondary-container": "#572000", "on-tertiary": "#ffffff", "on-primary-container": "#7c839b", "tertiary-fixed-dim": "#ffb95f", "primary-container": "#131b2e", "on-primary-fixed": "#131b2e", "tertiary": "#000000", "surface-container-highest": "#d3e4fe", "primary": "#000000", "outline": "#76777d", "surface-tint": "#565e74", "outline-variant": "#c6c6cd", "tertiary-container": "#2a1700", "surface-dim": "#cbdbf5", "on-error": "#ffffff", "secondary": "#a04100", "surface-container-high": "#dce9ff", "on-surface-variant": "#45464d", "error-container": "#ffdad6", "secondary-fixed": "#ffdbcc", "surface": "#f8f9ff", "tertiary-fixed": "#ffddb8", "on-tertiary-container": "#b87500", "surface-container": "#e5eeff", "on-error-container": "#93000a", "on-primary-fixed-variant": "#3f465c", "on-primary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-bright": "#f8f9ff", "primary-fixed-dim": "#bec6e0" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-lg": "1.5rem", "space-xs": "0.25rem", "margin-sm": "1rem", "margin": "2rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xl": "2.5rem", "gutter-sm": "1rem", "gutter": "1.5rem" }, fontFamily: { "body-md": ["Inter"], "code-sm": ["Inter"], "headline-xl-mobile": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-md": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "title-md": ["Inter"], "headline-sm": ["Inter"], "headline-xl": ["Inter"] }, fontSize: { "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }], "code-sm": ["0.8125rem", { "lineHeight": "1.125rem", "letterSpacing": "0.05em", "fontWeight": "500" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.025em", "fontWeight": "600" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "500" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col antialiased"><header class="fixed top-0 w-full z-50 pt-safe bg-primary-container/95 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.12)]"><div class="h-16 px-gutter-sm flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="JECRC Events Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XwiF3glo7v6rs5HW0U48Q2d5EXphhuPiGZkoOgtTc6giEZuI3zYgwuLY3HTfOXC0QYgB9Wjdy0WREqs6DfratAvjB0bBlI_i8BkWe1rehiSkJ0_oFjAlk0Yn3_5Qz1P-amnWOWJcDElPtBIch8kR86yIf1RXqtKhM_64F37UY4t6ymkXY9SEHJ5LmhhoDi6x3Fqt44rsoZCsJ-7k8a493PAWC7dj9sowSls_PPoEZkcnvcgYxpE8gGVA"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-title-md text-title-md text-on-primary tracking-tight">JECRC Events</span><span class="px-space-xs py-0.5 rounded-full bg-secondary-container/20 text-secondary-container font-label-sm text-[10px] uppercase font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>Live</span></div><span class="font-label-sm text-label-sm text-on-primary-container truncate max-w-[130px]">My Passes</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-primary-container hover:text-on-primary active:bg-primary/20"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="relative flex items-center justify-center p-0.5 rounded-full ring-2 ring-secondary-container/60"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7P2zz2ERRq5kE3i95xeL72_fbaiLSzhhFqsEQlj74bckwawovreo5M6pzQxN5UZzHUNTkTbfOJ5HTeC0LQgBv3G7-2Joq0khwCvsPgIlPp9jRoJurFKC0mKRlk_l8SaK6w2OKGDy57wY-BKj08LN1QdC0zGippnAK86as2ImB4UJgtKUhf9oWa7yGEr6QNMkLXHo3Yn2OFUJYH32lgjnSmUDioYtRhaYJj_QvjeqgCQYfiODHMRU"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface"><div class="flex flex-col w-full pb-24">
+<!-- Profile & Credential Card -->
+<section class="px-gutter-sm pt-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<!-- Top Profile Row -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-md">
+<div class="relative">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Modern high quality studio portrait photograph of an Indian female computer engineering college student smiling confidently, wearing stylish navy smart-casual university blazer against an ambient warm collegiate library background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO9QkL6NdR77ClXQxLL_i4pdGdDRAvOtgyZJiDy0BXqUUdwh94sSeOttrMajvAVCILVyQzOCcvxnUOBwFnYiM2xtU0I6pMqvQVx4vC2acKhxUdcK4Fjl6M7N5g3vIdXbfQKQ4TN-MX-auJgpQVjCLkRxpgy8FNg1t33ivIRRYtPo2uqdSd9Z96sYRwzj8FhTf1hmFVqwV1TCApZONkes3_iV77z-mfHMhAOP2rMaVsFnvZ9Bh148A"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary text-[10px] font-bold">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-title-md text-title-md text-on-surface font-bold tracking-tight">Aanya Verma</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">verified_user</span>
+                Verified JECRC
+              </span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">21JECRC042</p>
+<p class="font-body-md text-body-md text-outline truncate">B.Tech CSE • 3rd Year</p>
+</div>
+</div>
+<button aria-label="Share Student Card" class="w-9 h-9 rounded-full bg-surface-container-low text-on-surface flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+<!-- Quick 3 Stats Bar -->
+<div class="grid grid-cols-3 gap-space-sm pt-space-xs">
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-headline-sm text-headline-sm text-secondary-container font-bold">4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Registered</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Attended</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Certificates</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Segmented Tabs Navigation -->
+<section class="px-gutter-sm pt-space-md">
+<div class="bg-surface-container-high p-1 rounded-xl flex items-center gap-1 shadow-sm">
+<button class="flex-1 py-2 text-center rounded-lg font-label-md text-label-md transition-all bg-surface-container-lowest text-on-surface shadow-sm font-semibold" id="tab-btn-passes" onclick="switchStudentTab('passes')">
+        My Passes (2)
+      </button>
+<button class="flex-1 py-2 text-center rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:text-on-surface" id="tab-btn-certs" onclick="switchStudentTab('certs')">
+        Past & E-Certs
+      </button>
+<button class="flex-1 py-2 text-center rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:text-on-surface" id="tab-btn-saved" onclick="switchStudentTab('saved')">
+        Saved (3)
+      </button>
+</div>
+</section>
+<!-- TAB 1 CONTENT: UPCOMING PASSES -->
+<div class="flex flex-col gap-space-lg px-gutter-sm pt-space-md" id="tab-content-passes">
+<!-- PASS CARD 1: Hack-O-Holics 4.0 Digital Boarding Pass -->
+<article class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden relative">
+<!-- Top Accent Banner -->
+<div class="bg-primary-container p-space-md text-on-primary relative">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-secondary-container"></div>
+<div class="flex items-center justify-between pb-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary font-label-sm text-[10px] uppercase font-bold tracking-wider">
+            Official Hackathon Pass
+          </span>
+<span class="font-code-sm text-code-sm text-primary-fixed tracking-widest">GATE #02</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-primary font-bold tracking-tight">Hack-O-Holics 4.0</h3>
+<p class="font-label-sm text-label-sm text-on-primary-container flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-secondary-container">domain</span>
+          JECRC Innovation Lab & Central Auditorium
+        </p>
+</div>
+<!-- Main Voucher Meta Grid -->
+<div class="p-space-md grid grid-cols-2 gap-y-space-sm gap-x-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-outline block">DATE & TIME</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold">OCT 24, 2025</span>
+<span class="font-body-md text-body-md text-on-surface-variant block">10:00 AM IST</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block">TEAM ASSIGNMENT</span>
+<span class="font-title-md text-title-md text-secondary font-semibold">TECH-982</span>
+<span class="font-body-md text-body-md text-on-surface-variant block">Desk B-14 • Tier A</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block">STUDENT ATTENDEE</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">Aanya Verma</span>
+<span class="font-code-sm text-code-sm text-outline block">21JECRC042</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block">GATE STATUS</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            CONFIRMED
+          </span>
+<span class="font-code-sm text-code-sm text-outline block">NOT CHECKED-IN</span>
+</div>
+</div>
+<!-- Perforated Cutouts & Dash Line -->
+<div class="relative py-2 flex items-center">
+<!-- Left Notch Cutout -->
+<div class="absolute -left-3 w-6 h-6 rounded-full bg-surface shadow-inner"></div>
+<!-- Right Notch Cutout -->
+<div class="absolute -right-3 w-6 h-6 rounded-full bg-surface shadow-inner"></div>
+<!-- Perforation dashes -->
+<div class="w-full mx-5 border-t border-dashed border-outline-variant"></div>
+</div>
+<!-- Detachable QR Stub Area -->
+<div class="p-space-md bg-surface-container-low flex flex-col items-center text-center gap-space-sm">
+<div class="bg-surface-container-lowest p-3 rounded-xl shadow-sm flex flex-col items-center">
+<!-- High-Contrast Vector QR Display -->
+<svg class="w-40 h-40" fill="none" viewbox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#FFFFFF" height="160" width="160"></rect>
+<!-- QR Corner Eyes -->
+<rect fill="#0B1C30" height="40" rx="4" width="40" x="16" y="16"></rect>
+<rect fill="#FFFFFF" height="28" width="28" x="22" y="22"></rect>
+<rect fill="#FE6B00" height="16" width="16" x="28" y="28"></rect>
+<rect fill="#0B1C30" height="40" rx="4" width="40" x="104" y="16"></rect>
+<rect fill="#FFFFFF" height="28" width="28" x="110" y="22"></rect>
+<rect fill="#0B1C30" height="16" width="16" x="116" y="28"></rect>
+<rect fill="#0B1C30" height="40" rx="4" width="40" x="16" y="104"></rect>
+<rect fill="#FFFFFF" height="28" width="28" x="22" y="110"></rect>
+<rect fill="#FE6B00" height="16" width="16" x="28" y="116"></rect>
+<!-- QR Data Matrix Blocks -->
+<rect fill="#0B1C30" height="8" width="8" x="68" y="20"></rect>
+<rect fill="#FE6B00" height="8" width="12" x="80" y="20"></rect>
+<rect fill="#0B1C30" height="12" width="12" x="68" y="32"></rect>
+<rect fill="#0B1C30" height="8" width="8" x="84" y="36"></rect>
+<rect fill="#0B1C30" height="8" width="24" x="68" y="52"></rect>
+<rect fill="#FE6B00" height="8" width="16" x="20" y="68"></rect>
+<rect fill="#0B1C30" height="16" width="12" x="44" y="68"></rect>
+<rect fill="#0B1C30" height="16" width="16" x="64" y="68"></rect>
+<rect fill="#FE6B00" height="24" width="8" x="88" y="68"></rect>
+<rect fill="#0B1C30" height="8" width="20" x="104" y="68"></rect>
+<rect fill="#0B1C30" height="8" width="12" x="132" y="68"></rect>
+<rect fill="#0B1C30" height="8" width="12" x="20" y="88"></rect>
+<rect fill="#0B1C30" height="8" width="16" x="40" y="92"></rect>
+<rect fill="#FE6B00" height="16" width="8" x="64" y="92"></rect>
+<rect fill="#0B1C30" height="12" width="16" x="80" y="100"></rect>
+<rect fill="#0B1C30" height="16" width="12" x="104" y="88"></rect>
+<rect fill="#0B1C30" height="12" width="20" x="124" y="84"></rect>
+<rect fill="#0B1C30" height="8" width="24" x="68" y="116"></rect>
+<rect fill="#FE6B00" height="16" width="16" x="100" y="112"></rect>
+<rect fill="#0B1C30" height="24" width="8" x="124" y="104"></rect>
+<rect fill="#FE6B00" height="12" width="12" x="68" y="132"></rect>
+<rect fill="#0B1C30" height="16" width="20" x="88" y="128"></rect>
+<rect fill="#0B1C30" height="8" width="28" x="116" y="136"></rect>
+</svg>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold tracking-wider mt-2">JECRC_PASS_21JECRC042_HACK4</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary-container">qr_code_scanner</span>
+          Hold up to campus turnstile at Gate 02 to check-in
+        </p>
+</div>
+<!-- Action Footer -->
+<div class="p-space-md bg-surface-container-lowest flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<button class="flex-1 h-10 px-4 rounded-lg bg-secondary-container text-on-secondary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-secondary active:scale-[0.98] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">download</span>
+            Download Pass PDF
+          </button>
+<button aria-label="Add to Google Calendar" class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface flex items-center justify-center hover:bg-surface-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">event</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-outline">Registered Oct 14, 2025</span>
+<button class="font-label-sm text-label-sm text-error hover:underline">
+            Cancel Registration
+          </button>
+</div>
+</div>
+</article>
+<!-- PASS CARD 2: Renaissance 2026: Cultural Fest Pass (Wristband Style) -->
+<article class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden relative">
+<div class="bg-gradient-to-r from-secondary to-secondary-container p-space-md text-on-secondary">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-lowest/20 backdrop-blur-md text-on-secondary font-label-sm text-[10px] uppercase font-bold tracking-wider">
+            All-Access Student Wristband
+          </span>
+<span class="font-code-sm text-code-sm text-secondary-fixed tracking-widest">DAY 1 OF 3</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-secondary font-bold tracking-tight">Renaissance 2026: Fest Pass</h3>
+<p class="font-label-sm text-label-sm text-secondary-fixed flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">stadium</span>
+          Main Campus Football Arena • Open Grounds
+        </p>
+</div>
+<div class="p-space-md grid grid-cols-2 gap-y-space-sm gap-x-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-outline block">FEST DATES</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold">MAR 18-20</span>
+<span class="font-body-md text-body-md text-on-surface-variant block">Entry begins 4:00 PM</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block">PASS TYPE</span>
+<span class="font-title-md text-title-md text-secondary font-semibold">VIP STUDENT</span>
+<span class="font-body-md text-body-md text-on-surface-variant block">Valid with College ID</span>
+</div>
+</div>
+<!-- Perforated Cutouts -->
+<div class="relative py-2 flex items-center">
+<div class="absolute -left-3 w-6 h-6 rounded-full bg-surface shadow-inner"></div>
+<div class="absolute -right-3 w-6 h-6 rounded-full bg-surface shadow-inner"></div>
+<div class="w-full mx-5 border-t border-dashed border-outline-variant"></div>
+</div>
+<!-- Quick QR Row -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">PASS IDENTIFIER</span>
+<span class="font-code-sm text-code-sm text-on-surface font-bold tracking-wider">RN-2026-AANYA-042</span>
+<span class="font-label-sm text-label-sm text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">check_circle</span> Fast-Track Wristband Desk
+          </span>
+</div>
+<!-- Compact Scannable Mini-QR -->
+<div class="bg-surface-container-lowest p-2 rounded-lg shadow-sm flex-shrink-0">
+<svg class="w-16 h-16" fill="none" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#FFFFFF" height="64" width="64"></rect>
+<rect fill="#0B1C30" height="16" rx="2" width="16" x="6" y="6"></rect>
+<rect fill="#FFFFFF" height="10" width="10" x="9" y="9"></rect>
+<rect fill="#FE6B00" height="6" width="6" x="11" y="11"></rect>
+<rect fill="#0B1C30" height="16" rx="2" width="16" x="42" y="6"></rect>
+<rect fill="#FFFFFF" height="10" width="10" x="45" y="9"></rect>
+<rect fill="#0B1C30" height="6" width="6" x="47" y="11"></rect>
+<rect fill="#0B1C30" height="16" rx="2" width="16" x="6" y="42"></rect>
+<rect fill="#FFFFFF" height="10" width="10" x="9" y="45"></rect>
+<rect fill="#FE6B00" height="6" width="6" x="11" y="47"></rect>
+<rect fill="#0B1C30" height="6" width="6" x="28" y="8"></rect>
+<rect fill="#FE6B00" height="8" width="8" x="28" y="24"></rect>
+<rect fill="#0B1C30" height="6" width="8" x="12" y="28"></rect>
+<rect fill="#0B1C30" height="8" width="10" x="44" y="28"></rect>
+<rect fill="#0B1C30" height="6" width="10" x="26" y="44"></rect>
+<rect fill="#FE6B00" height="12" width="8" x="40" y="42"></rect>
+</svg>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest flex items-center justify-between">
+<button class="h-9 px-4 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md font-semibold flex items-center gap-1.5 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+          Save to Apple Wallet / Image
+        </button>
+<button class="font-label-sm text-label-sm text-secondary hover:underline">
+          View Guidelines
+        </button>
+</div>
+</article>
+</div>
+<!-- TAB 2 CONTENT: PAST EVENTS & E-CERTIFICATES (Rendered inside DOM, switchable) -->
+<div class="hidden flex-col gap-space-md px-gutter-sm pt-space-md" id="tab-content-certs">
+<!-- Completed Event Card 1: RoboRumble -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+              Verified Attendance
+            </span>
+<span class="font-label-sm text-label-sm text-outline">Sept 12, 2024</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold mt-1">RoboRumble 2024: Autonomous Line Follower</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Ranked 2nd Runner Up • Robotics Club JECRC</p>
+</div>
+<span class="w-10 h-10 rounded-full bg-surface-container-low text-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+</span>
+</div>
+<!-- Certificate Preview Badge Box -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+            PDF
+          </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Cert_RoboRumble_042.pdf</span>
+<span class="font-code-sm text-code-sm text-outline">HASH: #8F9A-JECRC-CERT</span>
+</div>
+</div>
+<button class="h-9 px-3 rounded-lg bg-secondary-container text-on-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1 hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+          Download
+        </button>
+</div>
+</article>
+<!-- Completed Event Card 2: AI Winter Summit -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+              Completed
+            </span>
+<span class="font-label-sm text-label-sm text-outline">Jan 08, 2024</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold mt-1">Winter AI & Cloud Symposium</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Speaker Session • IBM Academic Initiative</p>
+</div>
+<span class="w-10 h-10 rounded-full bg-surface-container-low text-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+            PDF
+          </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Cert_AISymposium_042.pdf</span>
+<span class="font-code-sm text-code-sm text-outline">HASH: #110B-JECRC-IBM</span>
+</div>
+</div>
+<button class="h-9 px-3 rounded-lg bg-secondary-container text-on-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1 hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+          Download
+        </button>
+</div>
+</article>
+</div>
+<!-- TAB 3 CONTENT: SAVED WATCHLIST (Rendered inside DOM, switchable) -->
+<div class="hidden flex-col gap-space-md px-gutter-sm pt-space-md" id="tab-content-saved">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-md flex items-center gap-space-md">
+<img class="w-20 h-20 rounded-lg object-cover flex-shrink-0" data-alt="Close up photography of mechanical drone quadcopter assembly with glowing green status lights on campus robotics workshop lab bench" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2bVedDKWW25VsA-M3qYGlMKWo9-2LSr-6mMgsHh4KZ_k8-HrmfrwRGmRexLzL06rK8tRAVs0xYa57gxKcW_kGrd4iluzGHUSYbAa_qSXTxqFKrG3PFMq4wcw-3bgOngJRHJ4sRiLiyGwTMUiZZHdVsAyGhez_5RIUAouYAhcWq9l77ocx33gtN_6_PVJAulqrOo0dkbOOLxtLWQZf0rVgLoCXaOAD0bM7uxFfkferslOOepLxtg4"/>
+<div class="flex-1 min-w-0">
+<span class="font-label-sm text-label-sm text-secondary font-bold">Registration Closes Soon</span>
+<h4 class="font-title-md text-title-md text-on-surface font-bold truncate">Drone Race Challenge 2026</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Nov 14 • Main Sports Complex</p>
+<button class="mt-2 h-8 px-3 rounded-lg bg-secondary-container text-on-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1 hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+          1-Click Register
+        </button>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-md flex items-center gap-space-md">
+<img class="w-20 h-20 rounded-lg object-cover flex-shrink-0" data-alt="Modern cybersecurity conference auditorium stage with dramatic deep navy blue ambient lights and bright code matrix projected on screens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw8vw_FW5KG_A4teetUu8X5XF_QMbnWDsHf2ME6orwVPrla-ZWXAODz0aRHt4VfZ-WvUYRn84hokR-8GxCvBN-Fy63hK-gOoat75WuR0tM2GbuD5xhTKKBkqv8suLFMUeGG4lYLcw28NYRujVi7QmhPxP9r_h45a3G_sVl0CYmC6VrCCoHDK8B5MlVzS0uuLX5SXIz8vVDnxDgqPx-pv04fSGuMFpSlTmD1GOMft0-4WYLQMcTsC4"/>
+<div class="flex-1 min-w-0">
+<span class="font-label-sm text-label-sm text-outline font-semibold">Free Workshop</span>
+<h4 class="font-title-md text-title-md text-on-surface font-bold truncate">Web3 & Smart Contract Security</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Nov 28 • Lab block 4</p>
+<button class="mt-2 h-8 px-3 rounded-lg bg-secondary-container text-on-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1 hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+          1-Click Register
+        </button>
+</div>
+</div>
+</div>
+<!-- Helpful Support / Campus Gate Guidelines -->
+<section class="px-gutter-sm pt-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">info</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Entry Desk Instructions</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+          Keep your phone screen brightness at 100% when presenting QR codes at campus gates. A physical JECRC student ID card is mandatory for verification.
+        </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Simple Tab Controller Script -->
+<script>
+  function switchStudentTab(tabId) {
+    const tabs = ['passes', 'certs', 'saved'];
+    tabs.forEach(t => {
+      const content = document.getElementById('tab-content-' + t);
+      const btn = document.getElementById('tab-btn-' + t);
+      if (t === tabId) {
+        content.classList.remove('hidden');
+        content.classList.add('flex');
+        btn.className = "flex-1 py-2 text-center rounded-lg font-label-md text-label-md transition-all bg-surface-container-lowest text-on-surface shadow-sm font-semibold";
+      } else {
+        content.classList.add('hidden');
+        content.classList.remove('flex');
+        btn.className = "flex-1 py-2 text-center rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:text-on-surface";
+      }
+    });
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-primary-container/95 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.16)]" data-active-classes="text-secondary-container font-semibold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[24px]">explore</span><span class="font-label-sm text-label-sm">Discover</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="event-details" href="#"><span class="material-symbols-outlined text-[24px]">terminal</span><span class="font-label-sm text-label-sm">Hackathon</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl transition-colors text-secondary-container font-semibold" data-path="my-passes" href="#"><span class="material-symbols-outlined text-[24px]">confirmation_number</span><span class="font-label-sm text-label-sm">Passes</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="admin-gate" href="#"><span class="material-symbols-outlined text-[24px]">qr_code_scanner</span><span class="font-label-sm text-label-sm">Gate Scanner</span></a></div></nav></body></html>

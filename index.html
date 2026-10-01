@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>JECRC Events – Campus Event Management & Ticketing Portal</title>
+  <meta name="description" content="Official centralized university event discovery, registration, and attendance platform for JECRC Foundation & University." />
+
+  <!-- Google Fonts: Inter & Material Symbols Outlined -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Tailwind CSS CDN with Stitch Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface": "#0b1c30",
+            "primary-fixed": "#dae2fd",
+            "inverse-primary": "#bec6e0",
+            "secondary-container": "#fe6b00",
+            "surface-container-low": "#eff4ff",
+            "on-secondary-fixed": "#351000",
+            "inverse-surface": "#213145",
+            "background": "#f8f9ff",
+            "on-tertiary-fixed": "#2a1700",
+            "on-secondary-fixed-variant": "#7a3000",
+            "surface-variant": "#d3e4fe",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed-variant": "#653e00",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#ffb693",
+            "on-background": "#0b1c30",
+            "inverse-on-surface": "#eaf1ff",
+            "on-secondary-container": "#572000",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#7c839b",
+            "tertiary-fixed-dim": "#ffb95f",
+            "primary-container": "#131b2e",
+            "on-primary-fixed": "#131b2e",
+            "tertiary": "#000000",
+            "surface-container-highest": "#d3e4fe",
+            "primary": "#000000",
+            "outline": "#76777d",
+            "surface-tint": "#565e74",
+            "outline-variant": "#c6c6cd",
+            "tertiary-container": "#2a1700",
+            "surface-dim": "#cbdbf5",
+            "on-error": "#ffffff",
+            "secondary": "#a04100",
+            "surface-container-high": "#dce9ff",
+            "on-surface-variant": "#45464d",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#ffdbcc",
+            "surface": "#f8f9ff",
+            "tertiary-fixed": "#ffddb8",
+            "on-tertiary-container": "#b87500",
+            "surface-container": "#e5eeff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#3f465c",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed-dim": "#bec6e0"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem",
+            "margin-sm": "1rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem",
+            "gutter-sm": "1rem",
+            "gutter": "1.5rem"
+          },
+          fontFamily: {
+            "body-md": ["Inter"],
+            "code-sm": ["JetBrains Mono", "monospace"],
+            "headline-xl-mobile": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-xl": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col">
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-[99999]" style="display: none;"></canvas>
+
+  <!-- Sticky Top Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 pt-safe bg-primary-container/95 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] border-b border-slate-800">
+    <div class="max-w-7xl mx-auto h-16 px-4 sm:px-6 flex items-center justify-between">
+      <!-- Left: Logo & Title -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+        <img alt="JECRC Events Logo" class="h-9 w-auto object-contain" src="assets/logo.svg" />
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-title-md text-title-md text-on-primary font-bold tracking-tight text-base sm:text-lg">JECRC Events</span>
+            <span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary-container font-label-sm text-[10px] uppercase font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>Live
+            </span>
+          </div>
+          <span class="font-label-sm text-[11px] text-on-primary-container truncate hidden sm:inline">Campus Ticketing & Gate Portal</span>
+        </div>
+      </div>
+
+      <!-- Center: Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-6">
+        <button class="nav-link-top text-secondary-container font-bold border-b-2 border-secondary-container pb-1 text-sm tracking-wide transition-all" data-target="home" onclick="navigateTo('home')">
+          Discover Events
+        </button>
+        <button class="nav-link-top text-surface-variant hover:text-white pb-1 text-sm tracking-wide transition-all" data-target="event-details" onclick="navigateTo('event-details', 'hack-o-holics')">
+          Hack-O-Holics
+        </button>
+        <button class="nav-link-top text-surface-variant hover:text-white pb-1 text-sm tracking-wide transition-all" data-target="my-passes" onclick="navigateTo('my-passes')">
+          My Passes
+        </button>
+        <button class="nav-link-top text-surface-variant hover:text-white pb-1 text-sm tracking-wide transition-all" data-target="admin-gate" onclick="navigateTo('admin-gate')">
+          Admin Gate Console
+        </button>
+      </nav>
+
+      <!-- Right: Actions & Student Profile Avatar -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <!-- Quick Switch to Admin Portal -->
+        <button class="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 text-white text-xs font-semibold transition-all" onclick="navigateTo('admin-gate')">
+          <span class="material-symbols-outlined text-[16px] text-secondary-container">shield_person</span>
+          Coordinator Mode
+        </button>
+
+        <!-- Notifications -->
+        <button aria-label="Notifications" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full text-on-primary-container hover:text-on-primary hover:bg-white/5 active:scale-95 transition-all" onclick="showToast('Campus Notification', 'Gate registrations are now open for Hack-O-Holics 4.0.', 'info')">
+          <span class="material-symbols-outlined text-[20px] sm:text-[22px]">notifications</span>
+        </button>
+
+        <!-- Student Profile Avatar with Fast Switch -->
+        <div class="flex items-center gap-2 cursor-pointer p-1 rounded-full hover:bg-white/5 transition-all" onclick="navigateTo('my-passes')" title="View Student Dashboard">
+          <div class="relative flex items-center justify-center p-0.5 rounded-full ring-2 ring-secondary-container/80">
+            <img alt="Aanya Verma - Student Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO9QkL6NdR77ClXQxLL_i4pdGdDRAvOtgyZJiDy0BXqUUdwh94sSeOttrMajvAVCILVyQzOCcvxnUOBwFnYiM2xtU0I6pMqvQVx4vC2acKhxUdcK4Fjl6M7N5g3vIdXbfQKQ4TN-MX-auJgpQVjCLkRxpgy8FNg1t33ivIRRYtPo2uqdSd9Z96sYRwzj8FhTf1hmFVqwV1TCApZONkes3_iV77z-mfHMhAOP2rMaVsFnvZ9Bh148A"/>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-primary-container"></span>
+          </div>
+          <div class="hidden xl:flex flex-col text-left">
+            <span class="text-xs font-bold text-white leading-tight">Aanya Verma</span>
+            <span class="text-[10px] font-mono text-secondary-container">21JECRC042</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Multi-View SPA Container -->
+  <main class="flex-1 w-full pt-16 pb-24 lg:pb-12 bg-surface">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: HOME SCREEN (EVENT DISCOVERY) -->
+    <!-- ========================================== -->
+    <div id="view-home" class="view-panel active">
+      <!-- Urgent Live Ticker Bar with Smooth Marquee -->
+      <div class="w-full bg-secondary-container text-on-secondary px-4 py-2 flex items-center justify-between shadow-sm overflow-hidden relative">
+        <div class="flex items-center gap-2 overflow-hidden w-full">
+          <span class="w-2.5 h-2.5 rounded-full bg-white animate-ping shrink-0"></span>
+          <div class="overflow-hidden relative w-full">
+            <div class="marquee-track items-center whitespace-nowrap gap-8 text-xs sm:text-sm font-semibold tracking-wide">
+              <span class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                Renaissance 2026 registrations filling fast! 820+ passes issued
+              </span>
+              <span class="opacity-60">•</span>
+              <span class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">schedule</span>
+                Hack-O-Holics 4.0 submission closes tonight at 11:59 PM
+              </span>
+              <span class="opacity-60">•</span>
+              <span class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">precision_manufacturing</span>
+                RoboRumble bot inspection begins Nov 18 in Robotics Lab 2
+              </span>
+              <span class="opacity-60">•</span>
+              <span class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">record_voice_over</span>
+                Wordsmith Asian Parliamentary Debate motions releasing tomorrow
+              </span>
+            </div>
+          </div>
+        </div>
+        <span class="px-2 py-0.5 rounded-full bg-black/20 text-[10px] font-bold shrink-0 ml-2 uppercase tracking-wider">
+          Urgent Alerts
+        </span>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- Hero Section with Deep Slate & Campus Character -->
+        <section class="mt-4 sm:mt-6 relative px-4 sm:px-8 pt-6 sm:pt-10 pb-8 sm:pb-12 bg-gradient-to-br from-primary-container via-inverse-surface to-[#1e293b] text-on-primary rounded-3xl shadow-xl overflow-hidden border border-slate-800">
+          <!-- Background Ambient Glow & Blueprint Pattern -->
+          <div class="absolute -right-20 -top-20 w-96 h-96 bg-secondary-container/15 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col gap-4 max-w-3xl">
+            <div class="inline-flex items-center gap-2 bg-surface-container-lowest/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+              <span class="material-symbols-outlined text-secondary-container text-[16px]">school</span>
+              <span class="font-label-sm text-xs text-surface-variant font-medium">JECRC Campus Connect • Student Council</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              Discover, Participate & Lead at <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary-container via-amber-400 to-orange-300">JECRC Events</span>
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+              From annual flagship cultural extravaganza <span class="font-semibold text-white">Renaissance</span> to nationwide inter-college hackathons—register seamlessly in 1-click using your Student Roll Number.
+            </p>
+
+            <!-- Quick Metrics Bar -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-4 my-2 bg-white/5 backdrop-blur-md rounded-2xl p-3 sm:p-4 text-center border border-white/10 max-w-xl">
+              <div>
+                <p class="text-xl sm:text-2xl font-bold text-white">18+</p>
+                <p class="text-[10px] sm:text-xs text-slate-300 uppercase tracking-wider font-semibold">Active Clubs</p>
+              </div>
+              <div class="border-x border-white/10">
+                <p class="text-xl sm:text-2xl font-bold text-secondary-container">₹2.5L+</p>
+                <p class="text-[10px] sm:text-xs text-slate-300 uppercase tracking-wider font-semibold">Prize Pools</p>
+              </div>
+              <div>
+                <p class="text-xl sm:text-2xl font-bold text-white">4,200+</p>
+                <p class="text-[10px] sm:text-xs text-slate-300 uppercase tracking-wider font-semibold">Registrations</p>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3 pt-2 flex-wrap">
+              <button class="bg-secondary-container hover:bg-secondary text-on-secondary font-label-md py-3 px-6 rounded-xl shadow-lg hover:shadow-orange-500/25 active:scale-[0.98] transition-all flex items-center justify-center gap-2 font-bold text-sm" id="btnExplore" onclick="document.getElementById('campusEventSearch').scrollIntoView({ behavior: 'smooth' }); document.getElementById('campusEventSearch').focus();">
+                <span class="material-symbols-outlined text-[20px]">travel_explore</span>
+                Explore Upcoming Events
+              </button>
+              <button class="bg-white/10 hover:bg-white/20 text-white font-label-md py-3 px-6 rounded-xl backdrop-blur-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 font-bold text-sm border border-white/15" onclick="document.getElementById('spotlight-clubs').scrollIntoView({ behavior: 'smooth' });">
+                <span class="material-symbols-outlined text-secondary-container text-[20px]">group_add</span>
+                Join a Club
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section class="mt-6 sm:mt-8 flex flex-col gap-3">
+          <!-- Real-Time Search Bar -->
+          <div class="relative w-full shadow-sm">
+            <span class="material-symbols-outlined absolute left-3.5 top-3 text-outline text-[22px]">search</span>
+            <input class="w-full bg-white text-on-surface font-body-md pl-11 pr-12 py-3 rounded-xl outline-none border border-slate-200 focus:border-secondary-container focus:ring-2 focus:ring-secondary-container/20 transition-all placeholder:text-slate-400 text-sm sm:text-base" id="campusEventSearch" placeholder="Search hackathons, workshops, fests, or organizing clubs..." type="search"/>
+            <button class="absolute right-3 top-2.5 p-1 rounded-md text-slate-400 hover:text-slate-700 transition-colors" title="Voice Search Simulation" onclick="showToast('Voice Search', 'Listening for campus events...', 'info')">
+              <span class="material-symbols-outlined text-[20px]">mic</span>
+            </button>
+          </div>
+
+          <!-- Eligibility Quick Filter Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar">
+            <span class="font-label-sm text-xs text-slate-500 shrink-0 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">tune</span> Filter:
+            </span>
+            <button class="filter-eligibility-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-inverse-surface text-white shrink-0 transition-all shadow-sm">
+              All Access
+            </button>
+            <button class="filter-eligibility-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 transition-all">
+              🎓 JECRC Exclusive
+            </button>
+            <button class="filter-eligibility-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 transition-all">
+              🌐 Open to All Colleges
+            </button>
+          </div>
+
+          <!-- Category Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            <button class="category-pill px-4 py-2 rounded-xl text-xs sm:text-sm bg-secondary-container text-white shrink-0 font-bold shadow-sm">
+              All
+            </button>
+            <button class="category-pill px-4 py-2 rounded-xl text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0 transition-colors font-medium">
+              💻 Technical & Coding
+            </button>
+            <button class="category-pill px-4 py-2 rounded-xl text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0 transition-colors font-medium">
+              🎭 Cultural & Arts
+            </button>
+            <button class="category-pill px-4 py-2 rounded-xl text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0 transition-colors font-medium">
+              🤖 Robotics
+            </button>
+            <button class="category-pill px-4 py-2 rounded-xl text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0 transition-colors font-medium">
+              📜 Literary & Debates
+            </button>
+            <button class="category-pill px-4 py-2 rounded-xl text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0 transition-colors font-medium">
+              🛠 Workshops
+            </button>
+          </div>
+        </section>
+
+        <!-- Events Grid Section -->
+        <section class="mt-6 sm:mt-8">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+              <h2 class="text-lg sm:text-xl font-bold text-on-surface tracking-tight">
+                Upcoming Campus Events
+              </h2>
+            </div>
+            <span class="text-xs text-secondary font-semibold cursor-pointer hover:underline" onclick="resetFilters()">
+              Show All Events
+            </span>
+          </div>
+
+          <!-- Dynamic Grid Container -->
+          <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+            <!-- Populated via JavaScript -->
+          </div>
+        </section>
+
+        <!-- Spotlight Section: Student Clubs Showcase -->
+        <section id="spotlight-clubs" class="mt-10 sm:mt-14">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary-container text-[24px]">verified</span>
+              <h2 class="text-lg sm:text-xl font-bold text-on-surface tracking-tight">
+                Student Clubs Spotlight
+              </h2>
+            </div>
+            <span class="text-xs text-slate-500 font-medium">18+ Active Campus Societies</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Club 1: Xananoids Coding Club -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+                  <span class="material-symbols-outlined text-[26px]">terminal</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface text-sm sm:text-base">Coding Club & Xananoids</h3>
+                  <span class="text-xs text-slate-500">450+ Active Coders</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Premier development guild driving hackathons, competitive programming, and open-source tooling.
+              </p>
+              <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1" onclick="navigateTo('event-details', 'hack-o-holics')">
+                View Club Events <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </button>
+            </div>
+
+            <!-- Club 2: Cultural Society -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-orange-50 text-secondary flex items-center justify-center font-bold">
+                  <span class="material-symbols-outlined text-[26px]">theater_comedy</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface text-sm sm:text-base">Cultural Society</h3>
+                  <span class="text-xs text-slate-500">620+ Performers</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Organizers of Renaissance, Footprints, Verve, and annual music fests across Rajasthan.
+              </p>
+              <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1" onclick="navigateTo('event-details', 'renaissance-2026')">
+                View Club Events <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </button>
+            </div>
+
+            <!-- Club 3: Acrobotics -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
+                  <span class="material-symbols-outlined text-[26px]">precision_manufacturing</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface text-sm sm:text-base">Acrobotics</h3>
+                  <span class="text-xs text-slate-500">280+ Roboticists</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Hardware prototyping, autonomous rovers, battle bots, and drone aerodynamics research.
+              </p>
+              <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1" onclick="navigateTo('event-details', 'roborumble-2026')">
+                View Club Events <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </button>
+            </div>
+
+            <!-- Club 4: Zarurat NGO Club -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                  <span class="material-symbols-outlined text-[26px]">volunteer_activism</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface text-sm sm:text-base">Zarurat – The Help Beyond</h3>
+                  <span class="text-xs text-slate-500">800+ Student Volunteers</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Dedicated student wing educating underprivileged children and hosting social empowerment fests.
+              </p>
+              <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1" onclick="showToast('Zarurat Initiatives', 'Zarurat annual child fest registrations will open in December.', 'info')">
+                View Initiatives <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ERP Sync Card -->
+        <section class="mt-8 sm:mt-10">
+          <div class="bg-primary-container text-on-primary rounded-2xl p-4 sm:p-6 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-slate-800">
+            <div class="flex items-center gap-3 sm:gap-4">
+              <div class="p-3 rounded-xl bg-white/10 text-secondary-container">
+                <span class="material-symbols-outlined text-[28px]">badge</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base">JECRC Student Council Pass Sync</h4>
+                <p class="text-xs sm:text-sm text-slate-300">Fast 1-click verification via University ERP Roll No. (21JECRC...)</p>
+              </div>
+            </div>
+            <button class="bg-secondary-container hover:bg-secondary text-on-secondary px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all" onclick="showToast('ERP Connected', 'Student Profile synced with ERP Roll No. 21JECRC042', 'success')">
+              Sync ERP Profile
+            </button>
+          </div>
+        </section>
+
+        <!-- Official Institutional Footer -->
+        <footer class="mt-12 sm:mt-16 pt-8 pb-8 border-t border-slate-200 flex flex-col gap-6 text-slate-600">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="font-bold text-on-surface text-base">JECRC Events Portal</span>
+                <span class="px-2 py-0.5 rounded-full bg-secondary-container/10 text-secondary text-[10px] font-bold">Official</span>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                JECRC University & JECRC Foundation, Plot No. IS-2036 to 2039, Ramchandrapura Industrial Area, Vidhani, Sitapura Extension, Jaipur, Rajasthan 303905.
+              </p>
+            </div>
+
+            <div>
+              <span class="font-bold text-on-surface text-xs block mb-2 uppercase tracking-wider">Event Support & Grievance</span>
+              <p class="text-xs text-slate-500 leading-relaxed mb-1">
+                Direct Helpdesk: <a href="mailto:events.support@jecrc.ac.in" class="text-secondary font-medium hover:underline">events.support@jecrc.ac.in</a>
+              </p>
+              <p class="text-xs text-slate-500">Campus Control Room: +91 141 277 0232</p>
+            </div>
+
+            <div>
+              <span class="font-bold text-on-surface text-xs block mb-2 uppercase tracking-wider">Quick Jump</span>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-secondary">All Events</a>
+                <span>•</span>
+                <a href="javascript:void(0)" onclick="navigateTo('my-passes')" class="hover:text-secondary">Student Passes</a>
+                <span>•</span>
+                <a href="javascript:void(0)" onclick="navigateTo('admin-gate')" class="hover:text-secondary">Gate Scanner</a>
+                <span>•</span>
+                <a href="javascript:void(0)" onclick="openCreateEventModal()" class="hover:text-secondary">Create Event</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+            <span>© 2026 JECRC Events • Engineered by JECRC Student Tech Council (v2.4.0)</span>
+            <span class="flex items-center gap-1 font-mono text-[11px]">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Live Gate API Operational
+            </span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: EVENT DETAILS & REGISTRATION SCREEN -->
+    <!-- ========================================== -->
+    <div id="view-event-details" class="view-panel">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- Breadcrumb Navigation Bar -->
+        <div class="py-3 flex items-center gap-2 text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
+          <a class="hover:text-slate-800 transition-colors flex items-center gap-1" href="javascript:void(0)" onclick="navigateTo('home')">
+            <span class="material-symbols-outlined text-[16px]">home</span> Home
+          </a>
+          <span class="material-symbols-outlined text-[14px] opacity-60">chevron_right</span>
+          <span>Campus Events</span>
+          <span class="material-symbols-outlined text-[14px] opacity-60">chevron_right</span>
+          <span class="text-secondary font-semibold" id="detail-breadcrumb-title">Hack-O-Holics 4.0</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Main Event Left Column (2 Cols on Desktop) -->
+          <div class="lg:col-span-2 flex flex-col gap-6">
+            <!-- Hero Visual & Countdown Section -->
+            <div class="relative w-full rounded-2xl overflow-hidden bg-primary-container shadow-xl">
+              <!-- High-tech Media Canvas -->
+              <div id="detail-hero-media" class="w-full h-64 sm:h-80 bg-cover bg-center relative transition-all" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBD8DRwpk_E2evTRHuZvE8YlUqWbyl0pimjLsEAAdvWr70Oj7a5Tlf_MSuhIlMNfwRGKn-fRGPvN5CLgi2RYEIiqkwdT20TgCsdyPZPiV-L0GDDXpNn8VsP1OWOoYhXTq1RxD3evD-D-0EJgXtD0I7nEty0eZh3Jl_LEC4zQq9L310AqoHVJVclPmQBhk3OQu5hzpoJjO2j5uPVKGXGHg6r1GtuHGvUNmoZjP5UAbHvhYWtgSwAGNs');">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-container via-primary-container/70 to-primary-container/20 backdrop-blur-[1px]"></div>
+
+                <!-- Verified Badge & Share Action -->
+                <div class="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+                  <span class="text-xs font-bold text-on-surface flex items-center gap-1">
+                    <span class="material-symbols-outlined text-secondary-container text-[16px]">verified</span>
+                    Official Campus Event
+                  </span>
+                </div>
+
+                <div class="absolute top-4 right-4 flex items-center gap-2">
+                  <button aria-label="Share Event" class="w-9 h-9 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-on-surface shadow-sm active:scale-95 transition-transform" onclick="showToast('Share Link', 'Event link copied to clipboard!', 'info')">
+                    <span class="material-symbols-outlined text-[18px]">share</span>
+                  </button>
+                  <button aria-label="Save Event" class="w-9 h-9 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-on-surface shadow-sm active:scale-95 transition-transform" onclick="toggleEventBookmark(window.selectedEventId)">
+                    <span class="material-symbols-outlined text-[18px]">bookmark_border</span>
+                  </button>
+                </div>
+
+                <!-- Live Countdown Timer Stack -->
+                <div class="absolute bottom-4 left-4 right-4">
+                  <div class="p-3 rounded-2xl bg-primary-container/90 backdrop-blur-md shadow-lg flex flex-col gap-2 border border-white/10">
+                    <div class="flex items-center justify-between px-1">
+                      <span class="text-[11px] font-bold text-secondary-fixed flex items-center gap-1 uppercase tracking-wider">
+                        <span class="material-symbols-outlined text-[15px] text-secondary-container">timer</span>
+                        Event Commences In
+                      </span>
+                      <span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary-fixed-dim text-[10px] font-bold">LIVE COUNTDOWN</span>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2 text-center">
+                      <div class="bg-surface-container-highest/20 rounded-xl py-2 px-1 flex flex-col">
+                        <span class="text-lg sm:text-xl font-bold text-white" id="days">04</span>
+                        <span class="text-[10px] text-slate-300 uppercase">Days</span>
+                      </div>
+                      <div class="bg-surface-container-highest/20 rounded-xl py-2 px-1 flex flex-col">
+                        <span class="text-lg sm:text-xl font-bold text-white" id="hours">11</span>
+                        <span class="text-[10px] text-slate-300 uppercase">Hours</span>
+                      </div>
+                      <div class="bg-surface-container-highest/20 rounded-xl py-2 px-1 flex flex-col">
+                        <span class="text-lg sm:text-xl font-bold text-white" id="minutes">38</span>
+                        <span class="text-[10px] text-slate-300 uppercase">Mins</span>
+                      </div>
+                      <div class="bg-secondary-container/30 rounded-xl py-2 px-1 flex flex-col border border-secondary-container/40">
+                        <span class="text-lg sm:text-xl font-bold text-secondary-fixed" id="seconds">45</span>
+                        <span class="text-[10px] text-secondary-fixed-dim uppercase">Secs</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Title & Organization Header -->
+            <div class="flex flex-col gap-2">
+              <span class="text-xs font-bold text-secondary uppercase tracking-wider flex items-center gap-1" id="detail-club-name">
+                <span class="material-symbols-outlined text-[16px]">groups_3</span> Organized by Coding Club & Xananoids
+              </span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight" id="detail-event-title">
+                Hack-O-Holics 4.0: 24-Hour Hackathon
+              </h1>
+            </div>
+
+            <!-- Quick Specs Pills Mosaic -->
+            <div class="flex flex-wrap gap-2 text-xs">
+              <div class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white shadow-sm border border-slate-200">
+                <span class="material-symbols-outlined text-secondary-container text-[18px]">calendar_month</span>
+                <span class="font-medium" id="detail-full-date">Oct 24-25, 2026 • 10:00 AM IST</span>
+              </div>
+              <div class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white shadow-sm border border-slate-200">
+                <span class="material-symbols-outlined text-secondary-container text-[18px]">location_on</span>
+                <span class="font-medium" id="detail-venue">Central Auditorium & Lab 3</span>
+              </div>
+              <div class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white shadow-sm border border-slate-200">
+                <span class="material-symbols-outlined text-secondary-container text-[18px]">confirmation_number</span>
+                <span class="font-medium" id="detail-fee">Entry: Free (Student ID Req.)</span>
+              </div>
+              <div class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white shadow-sm border border-slate-200">
+                <span class="material-symbols-outlined text-secondary-container text-[18px]">group</span>
+                <span class="font-medium">Team Size: Solo or 2-4 Members</span>
+              </div>
+            </div>
+
+            <!-- Interactive Segmented Tabs Navigation -->
+            <div>
+              <div class="bg-surface-container p-1 rounded-2xl flex items-center justify-between gap-1 shadow-inner overflow-x-auto">
+                <button class="tab-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm text-center transition-all bg-surface-container-lowest text-on-surface font-bold shadow-sm whitespace-nowrap" id="tab-btn-about" onclick="switchTab('about')">
+                  About Event
+                </button>
+                <button class="tab-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm text-center transition-all text-on-surface-variant font-medium whitespace-nowrap" id="tab-btn-timeline" onclick="switchTab('timeline')">
+                  Timeline
+                </button>
+                <button class="tab-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm text-center transition-all text-on-surface-variant font-medium whitespace-nowrap" id="tab-btn-prizes" onclick="switchTab('prizes')">
+                  Prizes & Perks
+                </button>
+                <button class="tab-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm text-center transition-all text-on-surface-variant font-medium whitespace-nowrap" id="tab-btn-coordinators" onclick="switchTab('coordinators')">
+                  Coordinators
+                </button>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT PANELS -->
+            <div class="flex flex-col gap-4">
+              <!-- Tab 1: About -->
+              <div class="tab-pane flex flex-col gap-4" id="tab-about">
+                <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col gap-3">
+                  <h3 class="font-bold text-on-surface text-base flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]">description</span>
+                    Event Overview
+                  </h3>
+                  <p class="text-sm text-slate-600 leading-relaxed" id="detail-description">
+                    Hack-O-Holics 4.0 challenges aspiring creators to prototype solutions bridging real-world collegiate & societal bottlenecks within 24 hours.
+                  </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col gap-3">
+                  <h3 class="font-bold text-on-surface text-base flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]">hub</span>
+                    Competition Tracks
+                  </h3>
+                  <div class="grid grid-cols-1 gap-3 mt-1" id="detail-tracks-container">
+                    <!-- Tracks rendered via JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 2: Timeline -->
+              <div class="tab-pane hidden flex flex-col gap-4" id="tab-timeline">
+                <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col gap-4">
+                  <h3 class="font-bold text-on-surface text-base flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]">calendar_view_day</span>
+                    Interactive Schedule Stepper
+                  </h3>
+                  <div class="flex flex-col pl-2" id="detail-timeline-container">
+                    <!-- Timeline rendered via JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 3: Prizes & Perks -->
+              <div class="tab-pane hidden flex flex-col gap-4" id="tab-prizes">
+                <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col gap-3">
+                  <h3 class="font-bold text-on-surface text-base flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]">military_tech</span>
+                    Cash Prizes & Incubation
+                  </h3>
+                  <div class="grid grid-cols-1 gap-3 mt-1" id="detail-prizes-container">
+                    <!-- Prizes rendered via JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 4: Coordinators -->
+              <div class="tab-pane hidden flex flex-col gap-4" id="tab-coordinators">
+                <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col gap-3">
+                  <h3 class="font-bold text-on-surface text-base flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]">contact_support</span>
+                    Student Coordinators & Desk Inquiries
+                  </h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1" id="detail-coordinators-container">
+                    <!-- Coordinators rendered via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Registration Card & Sticky Pass Box -->
+          <div class="flex flex-col gap-6">
+            <!-- Registration Form Box -->
+            <div id="registration-section" class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-md flex flex-col gap-4 sticky top-20">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <h3 class="font-bold text-on-surface text-base flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary-container">how_to_reg</span>
+                  Event Pass Registration
+                </h3>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold">1-Click ERP</span>
+              </div>
+
+              <!-- Solo vs. Team Segmented Control -->
+              <div class="flex bg-slate-100 p-1 rounded-xl">
+                <button type="button" class="flex-1 py-1.5 text-xs font-semibold rounded-lg bg-surface-container-lowest text-on-surface shadow-sm transition-all" id="mode-solo" onclick="setRegistrationMode('solo')">
+                  Solo Attendee
+                </button>
+                <button type="button" class="flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-600 transition-all" id="mode-team" onclick="setRegistrationMode('team')">
+                  Team (2-4 Members)
+                </button>
+              </div>
+
+              <!-- Registration Inputs Form -->
+              <div class="flex flex-col gap-3 text-xs">
+                <div>
+                  <label class="block text-slate-500 font-semibold mb-1">Student Full Name</label>
+                  <input type="text" id="reg-student-name" class="w-full h-10 px-3 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-800 outline-none" readonly />
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-slate-500 font-semibold mb-1">JECRC Roll No.</label>
+                    <input type="text" id="reg-student-roll" class="w-full h-10 px-3 rounded-lg border border-slate-200 bg-slate-50 font-mono font-medium text-slate-800 outline-none" readonly />
+                  </div>
+                  <div>
+                    <label class="block text-slate-500 font-semibold mb-1">Branch / Year</label>
+                    <input type="text" id="reg-student-branch" class="w-full h-10 px-3 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-800 outline-none truncate" readonly />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-slate-500 font-semibold mb-1">Student Email Address</label>
+                  <input type="email" id="reg-student-email" class="w-full h-10 px-3 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-800 outline-none" readonly />
+                </div>
+
+                <!-- Dynamic Team Fields (Hidden by default) -->
+                <div id="team-fields" class="hidden flex flex-col gap-2.5 pt-2 border-t border-slate-100">
+                  <div>
+                    <label class="block text-slate-700 font-bold mb-1">Team Name</label>
+                    <input type="text" id="reg-team-name" placeholder="e.g. ByteCrafters JECRC" class="w-full h-10 px-3 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none font-medium" />
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-700">Team Roster (Max 4)</span>
+                    <button type="button" class="text-secondary font-bold text-xs hover:underline flex items-center gap-0.5" onclick="addTeammateRow()">
+                      <span class="material-symbols-outlined text-[16px]">add</span> Add Teammate
+                    </button>
+                  </div>
+
+                  <div id="member-roster" class="flex flex-col gap-2">
+                    <!-- Member 1 is current student -->
+                    <div class="p-2 rounded-xl bg-slate-50 flex items-center justify-between border border-slate-200">
+                      <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+                        <span class="font-bold text-slate-800">Team Lead: Aanya Verma</span>
+                      </div>
+                      <span class="font-mono text-[10px] text-slate-500">21JECRC042</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Code of Conduct Checkbox -->
+                <div class="flex items-start gap-2 pt-2">
+                  <input type="checkbox" id="conduct-agree" checked class="mt-0.5 rounded border-slate-300 text-secondary-container focus:ring-secondary-container w-4 h-4 cursor-pointer" />
+                  <label for="conduct-agree" class="text-[11px] text-slate-600 cursor-pointer">
+                    I verify that all details match my JECRC ERP identity and agree to adhere to university fest guidelines.
+                  </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="button" class="mt-2 w-full py-3 bg-secondary-container hover:bg-secondary text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm" onclick="submitRegistration()">
+                  <span class="material-symbols-outlined text-[18px]">bolt</span>
+                  Confirm & Generate Digital Pass
+                </button>
+              </div>
+
+              <!-- Quick perks list -->
+              <div class="pt-3 border-t border-slate-100 flex flex-col gap-1.5 text-xs text-slate-500">
+                <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-emerald-600">check</span> Instant scannable QR ticket generation</span>
+                <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-emerald-600">check</span> Automated E-Certificate eligibility</span>
+                <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-emerald-600">check</span> Seamless fast-track check-in at Gate #02</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: STUDENT DASHBOARD (PASSES & CERTS) -->
+    <!-- ========================================== -->
+    <div id="view-my-passes" class="view-panel">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <!-- Student Profile Header Card -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-md border border-slate-200 flex flex-col gap-4">
+          <div class="flex items-start justify-between flex-wrap gap-4">
+            <div class="flex items-center gap-4">
+              <div class="relative">
+                <img class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover shadow-sm ring-4 ring-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO9QkL6NdR77ClXQxLL_i4pdGdDRAvOtgyZJiDy0BXqUUdwh94sSeOttrMajvAVCILVyQzOCcvxnUOBwFnYiM2xtU0I6pMqvQVx4vC2acKhxUdcK4Fjl6M7N5g3vIdXbfQKQ4TN-MX-auJgpQVjCLkRxpgy8FNg1t33ivIRRYtPo2uqdSd9Z96sYRwzj8FhTf1hmFVqwV1TCApZONkes3_iV77z-mfHMhAOP2rMaVsFnvZ9Bh148A" alt="Aanya Verma Avatar" />
+                <span class="absolute bottom-0 right-0 w-5 h-5 bg-secondary-container rounded-full flex items-center justify-center text-white text-[12px] font-bold shadow-sm">
+                  <span class="material-symbols-outlined text-[14px]">verified</span>
+                </span>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h2 class="text-lg sm:text-xl font-extrabold text-on-surface" id="dash-profile-name">Aanya Verma</h2>
+                  <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold flex items-center gap-1 border border-blue-200">
+                    <span class="material-symbols-outlined text-[14px]">school</span> Verified JECRC
+                  </span>
+                </div>
+                <p class="font-mono text-sm font-semibold text-secondary" id="dash-profile-roll">21JECRC042</p>
+                <p class="text-xs sm:text-sm text-slate-500" id="dash-profile-branch">B.Tech CSE • 3rd Year</p>
+              </div>
+            </div>
+
+            <button class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-1 transition-colors" onclick="showToast('Profile Verified', 'ERP Credentials active for 2026 academic session.', 'info')">
+              <span class="material-symbols-outlined text-[18px]">verified_user</span>
+              Active Passholder
+            </button>
+          </div>
+
+          <!-- Quick Stats 3-Card Grid -->
+          <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-2">
+            <div class="bg-surface-container-low p-3 sm:p-4 rounded-xl flex flex-col items-center text-center">
+              <span class="text-xl sm:text-2xl font-extrabold text-secondary-container" id="dash-registered-count">2</span>
+              <span class="text-[11px] sm:text-xs font-semibold text-slate-600">Registered</span>
+            </div>
+            <div class="bg-surface-container-low p-3 sm:p-4 rounded-xl flex flex-col items-center text-center">
+              <span class="text-xl sm:text-2xl font-extrabold text-on-surface" id="dash-attended-count">3</span>
+              <span class="text-[11px] sm:text-xs font-semibold text-slate-600">Attended</span>
+            </div>
+            <div class="bg-surface-container-low p-3 sm:p-4 rounded-xl flex flex-col items-center text-center">
+              <span class="text-xl sm:text-2xl font-extrabold text-amber-600" id="dash-certs-count">2</span>
+              <span class="text-[11px] sm:text-xs font-semibold text-slate-600">E-Certificates</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Segmented Tabs Navigation -->
+        <section class="mt-6">
+          <div class="bg-slate-200 p-1 rounded-2xl flex items-center gap-1 shadow-sm">
+            <button class="flex-1 py-2 text-center rounded-xl text-xs sm:text-sm transition-all bg-surface-container-lowest text-on-surface shadow-sm font-bold" id="tab-btn-passes" onclick="switchStudentTab('passes')">
+              My Passes
+            </button>
+            <button class="flex-1 py-2 text-center rounded-xl text-xs sm:text-sm transition-all text-slate-600 hover:text-slate-900 font-medium" id="tab-btn-certs" onclick="switchStudentTab('certs')">
+              Past & E-Certs
+            </button>
+            <button class="flex-1 py-2 text-center rounded-xl text-xs sm:text-sm transition-all text-slate-600 hover:text-slate-900 font-medium" id="tab-btn-saved" onclick="switchStudentTab('saved')">
+              Watchlist
+            </button>
+          </div>
+        </section>
+
+        <!-- Tab 1: Passes Container -->
+        <div id="tab-content-passes" class="mt-6 flex flex-col gap-6">
+          <div id="dash-passes-container" class="flex flex-col gap-6">
+            <!-- Passes rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Tab 2: Past Events & E-Certificates -->
+        <div id="tab-content-certs" class="hidden mt-6 flex flex-col gap-4">
+          <div id="dash-certs-container" class="flex flex-col gap-4">
+            <!-- Past events rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Tab 3: Saved / Watchlist -->
+        <div id="tab-content-saved" class="hidden mt-6 flex flex-col gap-4">
+          <div id="dash-saved-container" class="flex flex-col gap-3">
+            <!-- Saved events rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: ADMIN & CLUB COORDINATOR PANEL -->
+    <!-- ========================================== -->
+    <div id="view-admin-gate" class="view-panel">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- Top Coordinator Header Banner -->
+        <section class="w-full">
+          <div class="bg-primary-container text-on-primary rounded-2xl p-5 sm:p-6 shadow-xl relative overflow-hidden border border-slate-800">
+            <div class="absolute -right-10 -top-10 w-48 h-48 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="material-symbols-outlined text-[20px] text-secondary-container">shield_person</span>
+                  <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Gate Console & Live Scanner</span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white">Hack-O-Holics 4.0 – Entry Station #02</h2>
+                <div class="inline-flex items-center gap-2 mt-1 py-1 px-3 bg-white/10 rounded-lg w-fit text-xs text-slate-300">
+                  <span class="material-symbols-outlined text-[16px] text-amber-400">groups</span>
+                  <span>Organizing: Coding Club & Xananoids</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="flex flex-col items-end">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white text-xs font-bold">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    Gate 2 Active
+                  </span>
+                  <span class="text-[11px] text-slate-400 font-mono mt-1">Central Audi North Wing</span>
+                </div>
+                <button class="bg-secondary-container hover:bg-secondary text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center gap-1" onclick="openCreateEventModal()">
+                  <span class="material-symbols-outlined text-[18px]">add</span>
+                  Create Event
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Real-Time Metrics 4-Card Grid -->
+        <section class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-bold">Total Registered</span>
+              <span class="material-symbols-outlined text-secondary-container text-[20px]">how_to_reg</span>
+            </div>
+            <div class="mt-2">
+              <div class="text-2xl font-extrabold text-on-surface" id="metric-total-reg">1,248</div>
+              <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[12px]">trending_up</span> +18% today
+              </span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-bold">Live Check-ins</span>
+              <span class="material-symbols-outlined text-on-surface text-[20px]">door_front</span>
+            </div>
+            <div class="mt-2">
+              <div class="text-2xl font-extrabold text-on-surface" id="metric-live-checkin">382 / 450</div>
+              <span class="text-[11px] text-slate-500">Seat Quota Batch 1</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-bold">Capacity Filled</span>
+              <span class="font-bold text-secondary text-xs" id="metric-capacity-pct">84.8%</span>
+            </div>
+            <div class="mt-2">
+              <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden mb-1">
+                <div id="metric-capacity-bar" class="bg-secondary-container h-full rounded-full transition-all duration-500" style="width: 85%;"></div>
+              </div>
+              <span class="text-[11px] text-slate-500">Smooth Ingress Flow</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-bold">Queue / Pending</span>
+              <span class="material-symbols-outlined text-amber-600 text-[20px]">hourglass_top</span>
+            </div>
+            <div class="mt-2">
+              <div class="text-2xl font-extrabold text-on-surface" id="metric-queue-count">68</div>
+              <span class="text-[11px] text-slate-500">In Verification Line</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Scanner Console & Attendee Stream Grid -->
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Left: Live QR Scanner HUD Viewfinder (5 Cols on Desktop) -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <div class="bg-primary-container rounded-2xl p-5 shadow-xl text-on-primary flex flex-col relative overflow-hidden border border-slate-800">
+              <!-- HUD Header -->
+              <div class="flex items-center justify-between mb-3 z-10">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[20px] text-secondary-container">filter_center_focus</span>
+                  <span class="text-sm font-bold text-white">Live Camera HUD Viewfinder</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button aria-label="Toggle Flashlight" class="p-2 rounded-lg bg-white/10 text-white hover:bg-secondary-container transition-colors" id="torch-btn" onclick="toggleTorch()">
+                    <span class="material-symbols-outlined text-[18px]" id="torch-icon">flash_on</span>
+                  </button>
+                  <button aria-label="Switch Camera / Webcam" class="p-2 rounded-lg bg-white/10 text-white hover:bg-secondary-container transition-colors" id="toggle-camera-btn" onclick="toggleWebcamFeed()" title="Toggle WebCam Feed">
+                    <span class="material-symbols-outlined text-[18px]">videocam</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Viewfinder Screen Frame -->
+              <div class="relative w-full h-64 bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center border border-slate-700">
+                <!-- Real Video Element (When camera enabled) -->
+                <video id="camera-feed-video" class="absolute inset-0 w-full h-full object-cover hidden" autoplay playsinline></video>
+
+                <!-- Simulated Camera Feed Canvas -->
+                <div id="camera-feed-placeholder" class="absolute inset-0 bg-gradient-to-b from-primary-container/90 via-primary-container/50 to-primary-container/90 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[120px] text-slate-700/40">qr_code_scanner</span>
+                </div>
+
+                <!-- Laser Scanning Beam -->
+                <div class="laser-beam"></div>
+
+                <!-- Targeting HUD Box with Crosshairs -->
+                <div class="relative z-10 w-44 h-44 rounded-xl flex items-center justify-center pointer-events-none">
+                  <!-- Corners -->
+                  <div class="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-secondary-container -mt-1 -ml-1 rounded-tl-sm"></div>
+                  <div class="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-secondary-container -mt-1 -mr-1 rounded-tr-sm"></div>
+                  <div class="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 border-secondary-container -mb-1 -ml-1 rounded-bl-sm"></div>
+                  <div class="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 border-secondary-container -mb-1 -mr-1 rounded-br-sm"></div>
+
+                  <span class="material-symbols-outlined text-secondary-container/40 text-[32px]">qr_code_2</span>
+
+                  <div class="absolute bottom-2 px-2.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-white font-mono text-[10px] tracking-widest uppercase">
+                    Aim At Attendee Pass
+                  </div>
+                </div>
+
+                <!-- Quick Test Status Strip -->
+                <div class="absolute top-2 inset-x-2 flex items-center justify-center gap-1.5 z-20">
+                  <span class="text-[10px] text-slate-400 mr-1">Demo test:</span>
+                  <button class="px-2 py-0.5 rounded-full bg-emerald-600/80 hover:bg-emerald-600 text-white text-[10px] font-bold" onclick="setScanStatus('success')">Valid</button>
+                  <button class="px-2 py-0.5 rounded-full bg-amber-600/80 hover:bg-amber-600 text-white text-[10px] font-bold" onclick="setScanStatus('duplicate')">Duplicate</button>
+                  <button class="px-2 py-0.5 rounded-full bg-red-600/80 hover:bg-red-600 text-white text-[10px] font-bold" onclick="setScanStatus('invalid')">Invalid</button>
+                </div>
+              </div>
+
+              <!-- Instant Visual Verification Status Feedback Banner -->
+              <div class="mt-3 p-3 rounded-xl bg-white text-on-surface shadow-md transition-all" id="feedback-banner">
+                <!-- State 1: Green Success -->
+                <div class="flex items-start gap-3" id="status-success">
+                  <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[24px]">check_circle</span>
+                  </div>
+                  <div class="flex flex-col min-w-0 flex-1">
+                    <div class="flex items-center justify-between">
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
+                        ACCESS GRANTED
+                      </span>
+                      <span class="font-mono text-[11px] text-slate-500" id="granted-time">09:42:18 AM</span>
+                    </div>
+                    <h4 class="font-bold text-on-surface text-sm truncate mt-0.5" id="granted-student-name">Aanya Verma</h4>
+                    <span class="text-xs text-slate-600 font-mono" id="granted-student-meta">21JECRC042 • Team Alpha</span>
+                  </div>
+                </div>
+
+                <!-- State 2: Duplicate Warning -->
+                <div class="hidden flex items-start gap-3" id="status-duplicate">
+                  <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[24px]">warning</span>
+                  </div>
+                  <div class="flex flex-col min-w-0 flex-1">
+                    <div class="flex items-center justify-between">
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">
+                        ALREADY CHECKED IN
+                      </span>
+                      <span class="font-mono text-[11px] text-amber-700 font-semibold" id="dup-time">Checked: 09:14 AM</span>
+                    </div>
+                    <h4 class="font-bold text-on-surface text-sm truncate mt-0.5" id="dup-student-name">Rohan Sharma</h4>
+                    <span class="text-xs text-slate-600 font-mono" id="dup-student-meta">22JECRC118 • Gate 2 West</span>
+                  </div>
+                </div>
+
+                <!-- State 3: Invalid Error -->
+                <div class="hidden flex items-start gap-3" id="status-invalid">
+                  <div class="w-10 h-10 rounded-full bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[24px]">cancel</span>
+                  </div>
+                  <div class="flex flex-col min-w-0 flex-1">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-red-100 text-red-800 text-[10px] font-bold w-fit">
+                      INVALID / UNREGISTERED PASS
+                    </span>
+                    <p class="text-xs text-slate-600 mt-1">Pass QR hash code does not match any current event entry record.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Manual Fallback Roll Input Bar -->
+              <div class="mt-3 pt-3 border-t border-slate-700/60 flex flex-col gap-2">
+                <label class="text-xs text-slate-300 font-semibold flex items-center justify-between" for="manual-roll-input">
+                  <span>Manual Fallback Check-in</span>
+                  <span class="text-secondary-fixed text-[11px]">Emergency Gate Mode</span>
+                </label>
+                <div class="flex gap-2">
+                  <div class="relative flex-1">
+                    <span class="material-symbols-outlined text-[18px] text-slate-400 absolute left-3 top-2.5">badge</span>
+                    <input class="w-full h-10 pl-9 pr-3 rounded-xl bg-white text-on-surface font-mono text-xs outline-none focus:ring-2 focus:ring-secondary-container" id="manual-roll-input" placeholder="Roll No (e.g. 21JECRC042)" type="text" onkeydown="if(event.key==='Enter') handleManualVerify()"/>
+                  </div>
+                  <button class="h-10 px-4 rounded-xl bg-secondary-container hover:bg-secondary text-white font-bold text-xs transition-all flex items-center gap-1 shrink-0" onclick="handleManualVerify()">
+                    Verify Pass
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Command Bar -->
+            <div class="grid grid-cols-3 gap-2">
+              <button class="p-3 rounded-2xl bg-white text-on-surface shadow-sm hover:bg-slate-50 transition-all flex flex-col items-center justify-center text-center gap-1 border border-slate-200" onclick="broadcastGateNotice()">
+                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700">
+                  <span class="material-symbols-outlined text-[18px]">campaign</span>
+                </div>
+                <span class="text-[11px] font-bold">Gate Notice</span>
+              </button>
+
+              <button class="p-3 rounded-2xl bg-white text-on-surface shadow-sm hover:bg-slate-50 transition-all flex flex-col items-center justify-center text-center gap-1 border border-slate-200" onclick="exportAttendeesCSV()">
+                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700">
+                  <span class="material-symbols-outlined text-[18px]">download</span>
+                </div>
+                <span class="text-[11px] font-bold">Export CSV</span>
+              </button>
+
+              <button class="p-3 rounded-2xl bg-white text-on-surface shadow-sm hover:bg-slate-50 transition-all flex flex-col items-center justify-center text-center gap-1 border border-slate-200" onclick="openCreateEventModal()">
+                <div class="w-8 h-8 rounded-full bg-secondary-container text-white flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">add</span>
+                </div>
+                <span class="text-[11px] font-bold">New Event</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Live Check-in Stream & Attendee Roster Table (7 Cols on Desktop) -->
+          <div class="lg:col-span-7 flex flex-col gap-6">
+            <!-- Live Check-in Stream Feed -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[20px] text-secondary">stream</span>
+                  <h3 class="font-bold text-on-surface text-sm sm:text-base">Realtime Check-in Stream</h3>
+                </div>
+                <div class="flex items-center gap-1 text-xs text-secondary font-semibold">
+                  <span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                  Live Ingress
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2" id="live-stream-container">
+                <!-- Stream items rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- Searchable Attendee Roster Table -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col gap-3">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                <div>
+                  <h3 class="font-bold text-on-surface text-sm sm:text-base">Verified Attendee Roster</h3>
+                  <p class="text-xs text-slate-500">Searchable list for administrative gates & security records.</p>
+                </div>
+                <div class="relative w-full sm:w-64">
+                  <span class="material-symbols-outlined text-[18px] text-slate-400 absolute left-3 top-2.5">search</span>
+                  <input type="text" id="admin-attendee-search" placeholder="Search name or roll no..." class="w-full h-9 pl-9 pr-3 rounded-lg border border-slate-200 text-xs outline-none focus:ring-1 focus:ring-secondary-container" />
+                </div>
+              </div>
+
+              <!-- Table -->
+              <div class="overflow-x-auto border border-slate-200 rounded-xl mt-1">
+                <table class="w-full text-left text-xs">
+                  <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
+                    <tr>
+                      <th class="px-4 py-3">Student Name</th>
+                      <th class="px-4 py-3">Roll Number</th>
+                      <th class="px-4 py-3">Team / Slot</th>
+                      <th class="px-4 py-3">Gate</th>
+                      <th class="px-4 py-3">Status</th>
+                      <th class="px-4 py-3">Time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-attendee-tbody">
+                    <!-- Attendees populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Mobile Sticky Bottom Navigation Bar (Matching Google Stitch Layout) -->
+  <nav class="md:hidden fixed bottom-0 w-full z-50 pb-safe bg-primary-container/95 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.16)] border-t border-slate-800">
+    <div class="flex justify-around items-center h-16 px-2">
+      <a class="bottom-nav-item flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] px-2 py-1 rounded-xl text-secondary-container font-semibold transition-colors" data-path="home" href="javascript:void(0)" onclick="navigateTo('home')">
+        <span class="material-symbols-outlined text-[24px]">explore</span>
+        <span class="font-label-sm text-[11px]">Discover</span>
+      </a>
+
+      <a class="bottom-nav-item flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] px-2 py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="event-details" href="javascript:void(0)" onclick="navigateTo('event-details', 'hack-o-holics')">
+        <span class="material-symbols-outlined text-[24px]">terminal</span>
+        <span class="font-label-sm text-[11px]">Hackathon</span>
+      </a>
+
+      <a class="bottom-nav-item flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] px-2 py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="my-passes" href="javascript:void(0)" onclick="navigateTo('my-passes')">
+        <span class="material-symbols-outlined text-[24px]">confirmation_number</span>
+        <span class="font-label-sm text-[11px]">Passes</span>
+      </a>
+
+      <a class="bottom-nav-item flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] px-2 py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="admin-gate" href="javascript:void(0)" onclick="navigateTo('admin-gate')">
+        <span class="material-symbols-outlined text-[24px]">qr_code_scanner</span>
+        <span class="font-label-sm text-[11px]">Gate Scanner</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- MODAL: REGISTRATION SUCCESS CONFIRMATION -->
+  <!-- ========================================== -->
+  <div id="success-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl flex flex-col items-center text-center animate-in zoom-in-95">
+      <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3">
+        <span class="material-symbols-outlined text-[36px]">check_circle</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-extrabold text-on-surface">Registration Confirmed!</h3>
+      <p class="text-xs sm:text-sm text-slate-600 mt-1">
+        You are officially registered for <span class="font-bold text-on-surface" id="success-modal-event">Hack-O-Holics 4.0</span>.
+      </p>
+
+      <div class="w-full my-4 p-3 rounded-2xl bg-surface-container-low border border-slate-200 flex flex-col items-center">
+        <span class="text-[11px] text-slate-500 uppercase font-semibold">Your Digital Pass ID</span>
+        <span class="font-mono text-sm sm:text-base font-extrabold text-secondary tracking-wider mt-0.5" id="success-modal-pass-id">
+          JECRC_PASS_21JECRC042_HACK4
+        </span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-2 w-full">
+        <button class="flex-1 py-3 bg-secondary-container hover:bg-secondary text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5" onclick="closeSuccessModalAndGoToPasses()">
+          <span class="material-symbols-outlined text-[18px]">confirmation_number</span>
+          View Digital Pass
+        </button>
+        <button class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl transition-all" onclick="document.getElementById('success-modal').classList.add('hidden')">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: OFFICIAL E-CERTIFICATE PREVIEW -->
+  <!-- ========================================== -->
+  <div id="certificate-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl flex flex-col gap-4 relative animate-in zoom-in-95 my-8">
+      <button class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700" onclick="closeCertificateModal()">
+        <span class="material-symbols-outlined text-[22px]">close</span>
+      </button>
+
+      <!-- Certificate Printable Paper -->
+      <div id="printable-certificate" class="p-6 sm:p-10 rounded-2xl border-8 border-double border-amber-600/40 bg-gradient-to-b from-amber-50/40 via-white to-amber-50/40 flex flex-col items-center text-center relative shadow-inner">
+        <!-- University Crest / Logo -->
+        <img src="assets/logo.svg" alt="JECRC Crest" class="h-14 w-auto mb-2" />
+        <span class="text-xs font-bold text-slate-700 tracking-widest uppercase">JECRC University & Foundation, Jaipur</span>
+        <h2 class="text-xl sm:text-3xl font-extrabold text-[#0A192F] mt-2 font-serif tracking-tight">CERTIFICATE OF MERIT</h2>
+        <span class="text-xs text-amber-700 font-semibold tracking-wider uppercase mt-1">Presented with Distinction</span>
+
+        <p class="text-xs sm:text-sm text-slate-600 mt-4">This is to proudly certify that</p>
+        <h3 class="text-lg sm:text-2xl font-bold text-on-surface font-serif my-1" id="cert-student-name">Aanya Verma</h3>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-lg leading-relaxed">
+          of Department of Computer Science & Engineering has successfully participated and achieved <span class="font-bold text-on-surface" id="cert-rank">2nd Runner Up</span> in
+        </p>
+
+        <h4 class="text-base sm:text-lg font-bold text-secondary my-1" id="cert-event-title">Hack-A-Verse 2025 (AI Edition)</h4>
+        <p class="text-xs text-slate-500">Conducted on <span id="cert-date">March 15, 2025</span> at JECRC Campus, Jaipur.</p>
+
+        <!-- Signature & Stamp Section -->
+        <div class="w-full grid grid-cols-3 gap-2 mt-8 pt-4 border-t border-slate-200 text-center items-end">
+          <div class="flex flex-col items-center">
+            <span class="font-serif italic text-xs text-slate-800">Dr. O.P. Sharma</span>
+            <div class="w-24 h-0.5 bg-slate-400 my-1"></div>
+            <span class="text-[10px] text-slate-500">Director, JECRC</span>
+          </div>
+
+          <div class="flex flex-col items-center justify-center">
+            <div class="w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-amber-600 shadow-sm">
+              <span class="material-symbols-outlined text-[24px]">verified</span>
+            </div>
+            <span class="text-[9px] font-mono text-slate-400 mt-1 uppercase" id="cert-id">JECRC-CERT-2025-8831</span>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <span class="font-serif italic text-xs text-slate-800">Prof. Mukt Bihari</span>
+            <div class="w-24 h-0.5 bg-slate-400 my-1"></div>
+            <span class="text-[10px] text-slate-500">Dean Student Affairs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold" onclick="closeCertificateModal()">
+          Close
+        </button>
+        <button class="px-5 py-2 rounded-xl bg-secondary-container hover:bg-secondary text-white text-xs font-bold shadow-md flex items-center gap-1.5" onclick="window.print()">
+          <span class="material-symbols-outlined text-[16px]">print</span>
+          Print / Save PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: CREATE NEW EVENT WIZARD -->
+  <!-- ========================================== -->
+  <div id="create-event-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl flex flex-col gap-4 relative animate-in zoom-in-95 my-8">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary-container">add_circle</span>
+          <h3 class="text-lg font-bold text-on-surface">Publish New Campus Event</h3>
+        </div>
+        <button class="p-1 text-slate-400 hover:text-slate-700" onclick="closeCreateEventModal()">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <form id="create-event-form" class="flex flex-col gap-3 text-xs" onsubmit="handleCreateEventSubmit(event)">
+        <div>
+          <label class="block text-slate-700 font-semibold mb-1">Event Title *</label>
+          <input type="text" id="new-event-title" required placeholder="e.g. Flutter Forward Hackathon 2026" class="w-full h-10 px-3 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-700 font-semibold mb-1">Organizing Club *</label>
+            <input type="text" id="new-event-club" required placeholder="e.g. Google DSC JECRC" class="w-full h-10 px-3 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none" />
+          </div>
+          <div>
+            <label class="block text-slate-700 font-semibold mb-1">Category *</label>
+            <select id="new-event-category" class="w-full h-10 px-2 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none bg-white">
+              <option value="Technical & Coding">Technical & Coding</option>
+              <option value="Cultural & Arts">Cultural & Arts</option>
+              <option value="Robotics">Robotics</option>
+              <option value="Literary & Debates">Literary & Debates</option>
+              <option value="Workshops">Workshops</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-700 font-semibold mb-1">Date & Time *</label>
+            <input type="text" id="new-event-date" required placeholder="e.g. Dec 15, 2026 • 10:00 AM" class="w-full h-10 px-3 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none" />
+          </div>
+          <div>
+            <label class="block text-slate-700 font-semibold mb-1">Venue Location *</label>
+            <input type="text" id="new-event-venue" required placeholder="e.g. IBM Lab, Academic Block C" class="w-full h-10 px-3 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-700 font-semibold mb-1">Max Seat Capacity</label>
+            <input type="number" id="new-event-capacity" value="120" class="w-full h-10 px-3 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none" />
+          </div>
+          <div>
+            <label class="block text-slate-700 font-semibold mb-1">Entry Fee</label>
+            <input type="text" id="new-event-fee" value="Free" placeholder="Free or ₹150" class="w-full h-10 px-3 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-700 font-semibold mb-1">Event Description</label>
+          <textarea id="new-event-desc" rows="3" placeholder="Brief outline of event rules, eligibility, and hands-on tracks..." class="w-full p-2.5 rounded-lg border border-slate-300 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container outline-none"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+          <button type="button" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold" onclick="closeCreateEventModal()">
+            Cancel
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-secondary-container hover:bg-secondary text-white font-bold shadow-md transition-all">
+            Publish Event
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>

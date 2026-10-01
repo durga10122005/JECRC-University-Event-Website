@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f8f9ff;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface": "#0b1c30", "primary-fixed": "#dae2fd", "inverse-primary": "#bec6e0", "secondary-container": "#fe6b00", "surface-container-low": "#eff4ff", "on-secondary-fixed": "#351000", "inverse-surface": "#213145", "background": "#f8f9ff", "on-tertiary-fixed": "#2a1700", "on-secondary-fixed-variant": "#7a3000", "surface-variant": "#d3e4fe", "on-secondary": "#ffffff", "on-tertiary-fixed-variant": "#653e00", "error": "#ba1a1a", "secondary-fixed-dim": "#ffb693", "on-background": "#0b1c30", "inverse-on-surface": "#eaf1ff", "on-secondary-container": "#572000", "on-tertiary": "#ffffff", "on-primary-container": "#7c839b", "tertiary-fixed-dim": "#ffb95f", "primary-container": "#131b2e", "on-primary-fixed": "#131b2e", "tertiary": "#000000", "surface-container-highest": "#d3e4fe", "primary": "#000000", "outline": "#76777d", "surface-tint": "#565e74", "outline-variant": "#c6c6cd", "tertiary-container": "#2a1700", "surface-dim": "#cbdbf5", "on-error": "#ffffff", "secondary": "#a04100", "surface-container-high": "#dce9ff", "on-surface-variant": "#45464d", "error-container": "#ffdad6", "secondary-fixed": "#ffdbcc", "surface": "#f8f9ff", "tertiary-fixed": "#ffddb8", "on-tertiary-container": "#b87500", "surface-container": "#e5eeff", "on-error-container": "#93000a", "on-primary-fixed-variant": "#3f465c", "on-primary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-bright": "#f8f9ff", "primary-fixed-dim": "#bec6e0" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-lg": "1.5rem", "space-xs": "0.25rem", "margin-sm": "1rem", "margin": "2rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xl": "2.5rem", "gutter-sm": "1rem", "gutter": "1.5rem" }, fontFamily: { "body-md": ["Inter"], "code-sm": ["Inter"], "headline-xl-mobile": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-md": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "title-md": ["Inter"], "headline-sm": ["Inter"], "headline-xl": ["Inter"] }, fontSize: { "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }], "code-sm": ["0.8125rem", { "lineHeight": "1.125rem", "letterSpacing": "0.05em", "fontWeight": "500" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.025em", "fontWeight": "600" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "500" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col antialiased"><header class="fixed top-0 w-full z-50 pt-safe bg-primary-container/95 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.12)]"><div class="h-16 px-gutter-sm flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="JECRC Events Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XwiF3glo7v6rs5HW0U48Q2d5EXphhuPiGZkoOgtTc6giEZuI3zYgwuLY3HTfOXC0QYgB9Wjdy0WREqs6DfratAvjB0bBlI_i8BkWe1rehiSkJ0_oFjAlk0Yn3_5Qz1P-amnWOWJcDElPtBIch8kR86yIf1RXqtKhM_64F37UY4t6ymkXY9SEHJ5LmhhoDi6x3Fqt44rsoZCsJ-7k8a493PAWC7dj9sowSls_PPoEZkcnvcgYxpE8gGVA"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-title-md text-title-md text-on-primary tracking-tight">JECRC Events</span><span class="px-space-xs py-0.5 rounded-full bg-secondary-container/20 text-secondary-container font-label-sm text-[10px] uppercase font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>Live</span></div><span class="font-label-sm text-label-sm text-on-primary-container truncate max-w-[130px]">Admin Gate</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-primary-container hover:text-on-primary active:bg-primary/20"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="relative flex items-center justify-center p-0.5 rounded-full ring-2 ring-secondary-container/60"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7P2zz2ERRq5kE3i95xeL72_fbaiLSzhhFqsEQlj74bckwawovreo5M6pzQxN5UZzHUNTkTbfOJ5HTeC0LQgBv3G7-2Joq0khwCvsPgIlPp9jRoJurFKC0mKRlk_l8SaK6w2OKGDy57wY-BKj08LN1QdC0zGippnAK86as2ImB4UJgtKUhf9oWa7yGEr6QNMkLXHo3Yn2OFUJYH32lgjnSmUDioYtRhaYJj_QvjeqgCQYfiODHMRU"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface"><div class="flex flex-col w-full pb-24">
+<!-- Top Coordinator Banner Context -->
+<section class="w-full px-margin-sm pt-space-md">
+<div class="bg-primary-container text-on-primary rounded-xl p-space-md shadow-md relative overflow-hidden">
+<!-- Ambient light effect -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-secondary-container/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between gap-space-sm relative z-10">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="material-symbols-outlined text-[18px] text-secondary-container">shield_person</span>
+<span class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">Coordinator Gate Console</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-primary font-bold truncate">Hack-O-Holics 4.0</h2>
+<!-- Club Switcher Dropdown button -->
+<div class="inline-flex items-center gap-space-xs mt-1 py-0.5 px-2 bg-inverse-surface/60 rounded-lg w-fit">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed-dim">groups</span>
+<span class="font-label-sm text-label-sm text-surface-variant font-medium">Coding Club & Xananoids</span>
+<span class="material-symbols-outlined text-[14px] text-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/10 backdrop-blur-sm text-surface-bright font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+            Gate 1 Active
+          </span>
+<span class="font-label-sm text-[11px] text-on-primary-container mt-1 font-mono">Central Audi</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Real-Time Metrics 4-Card Grid -->
+<section class="w-full px-margin-sm mt-space-md">
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Registered</span>
+<span class="material-symbols-outlined text-[18px] text-secondary-container">how_to_reg</span>
+</div>
+<div class="mt-2">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">1,248</div>
+<div class="flex items-center gap-0.5 text-secondary font-label-sm text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[12px]">trending_up</span>
+            +18% today
+          </div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live Check-ins</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface">door_front</span>
+</div>
+<div class="mt-2">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">
+            382 <span class="font-body-md text-body-md font-normal text-on-surface-variant">/ 450</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant">Seat Quota Batch 1</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Capacity Used</span>
+<span class="font-label-sm text-label-sm font-bold text-secondary">84.8%</span>
+</div>
+<div class="mt-2">
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden mb-1">
+<div class="bg-secondary-container h-full rounded-full transition-all duration-500" style="width: 85%;"></div>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant">High Traffic Flow</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pending Entry</span>
+<span class="material-symbols-outlined text-[18px] text-on-secondary-fixed-variant">hourglass_top</span>
+</div>
+<div class="mt-2">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">68</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant">In Audi Queues</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Gate QR Scanner Viewfinder -->
+<section class="w-full px-margin-sm mt-space-md">
+<div class="bg-primary-container rounded-2xl p-space-md shadow-lg text-on-primary flex flex-col relative overflow-hidden">
+<!-- HUD Title & Toggles -->
+<div class="flex items-center justify-between mb-3 z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-secondary-container animate-spin" style="animation-duration: 4s;">flip</span>
+<span class="font-title-md text-title-md text-on-primary font-semibold">Camera HUD Viewfinder</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button aria-label="Toggle Flashlight" class="p-1.5 rounded-lg bg-inverse-surface/80 text-on-primary hover:bg-secondary-container transition-colors" id="torch-btn" onclick="toggleTorch()">
+<span class="material-symbols-outlined text-[18px]" id="torch-icon">flash_on</span>
+</button>
+<button aria-label="Camera Switch" class="p-1.5 rounded-lg bg-inverse-surface/80 text-on-primary hover:bg-inverse-surface">
+<span class="material-symbols-outlined text-[18px]">cameraswitch</span>
+</button>
+</div>
+</div>
+<!-- Viewfinder Frame -->
+<div class="relative w-full h-64 bg-surface-container-highest/10 rounded-xl overflow-hidden flex items-center justify-center">
+<!-- Simulated camera feed with blur & noise -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary-container/80 via-primary-container/40 to-primary-container/90 z-0"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-10">
+<span class="material-symbols-outlined text-[140px] text-surface-variant">qr_code_scanner</span>
+</div>
+<!-- Targeting HUD Box -->
+<div class="relative z-10 w-48 h-48 rounded-lg flex items-center justify-center">
+<!-- Crosshairs Corner Accents -->
+<div class="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-secondary-container -mt-1 -ml-1 rounded-tl-sm"></div>
+<div class="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-secondary-container -mt-1 -mr-1 rounded-tr-sm"></div>
+<div class="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 border-secondary-container -mb-1 -ml-1 rounded-bl-sm"></div>
+<div class="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 border-secondary-container -mb-1 -mr-1 rounded-br-sm"></div>
+<!-- Animated Laser Scanning Beam -->
+<div class="absolute inset-x-2 h-1 bg-gradient-to-r from-transparent via-secondary-container to-transparent shadow-[0_0_12px_#fe6b00] animate-bounce" style="animation-duration: 2.2s;"></div>
+<!-- Central Target Cross -->
+<span class="material-symbols-outlined text-secondary-container/40 text-[32px]">filter_center_focus</span>
+<!-- Live scanning badge -->
+<div class="absolute bottom-2 px-2 py-0.5 rounded bg-inverse-surface/80 backdrop-blur-md text-surface-bright font-code-sm text-[10px] tracking-widest uppercase">
+            Aim at Attendee Pass
+          </div>
+</div>
+<!-- Feedback Demonstration Trigger Pill Strip -->
+<div class="absolute top-2 inset-x-2 flex items-center justify-center gap-1.5 z-20">
+<span class="font-label-sm text-[10px] text-on-primary-container mr-1">Demo status:</span>
+<button class="px-2 py-0.5 rounded-full bg-surface-container-lowest/15 hover:bg-surface-container-lowest/30 text-surface-bright font-label-sm text-[10px] transition-all" onclick="setScanStatus('success')">Valid</button>
+<button class="px-2 py-0.5 rounded-full bg-surface-container-lowest/15 hover:bg-surface-container-lowest/30 text-surface-bright font-label-sm text-[10px] transition-all" onclick="setScanStatus('duplicate')">Duplicate</button>
+<button class="px-2 py-0.5 rounded-full bg-surface-container-lowest/15 hover:bg-surface-container-lowest/30 text-surface-bright font-label-sm text-[10px] transition-all" onclick="setScanStatus('invalid')">Invalid</button>
+</div>
+</div>
+<!-- Instant Visual Feedback Live Banners -->
+<div class="mt-3 p-space-sm rounded-xl bg-surface-container-lowest text-on-surface shadow-md transition-all" id="feedback-banner">
+<!-- Success State (Default Active) -->
+<div class="flex items-start gap-space-sm" id="status-success">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px] text-secondary-container">check_circle</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-[11px] font-bold">
+                ACCESS GRANTED
+              </span>
+<span class="font-code-sm text-[11px] text-on-surface-variant">09:42:18 AM</span>
+</div>
+<h4 class="font-title-md text-title-md font-bold text-on-surface truncate mt-0.5">Aanya Verma</h4>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-md text-body-md">
+<span class="font-mono text-on-surface font-semibold text-code-sm">21JECRC042</span>
+<span>•</span>
+<span class="truncate">Team Alpha (Track: AI/ML)</span>
+</div>
+</div>
+</div>
+<!-- Duplicate Warning State -->
+<div class="hidden flex items-start gap-space-sm" id="status-duplicate">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px] text-error">warning</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-error text-on-error font-label-sm text-[11px] font-bold">
+                ALREADY CHECKED IN
+              </span>
+<span class="font-code-sm text-[11px] text-error">Checked: 09:14 AM</span>
+</div>
+<h4 class="font-title-md text-title-md font-bold text-on-surface truncate mt-0.5">Rohan Sharma</h4>
+<span class="font-mono text-on-surface-variant text-code-sm">22JECRC118 • Gate 2 West</span>
+</div>
+</div>
+<!-- Invalid Error State -->
+<div class="hidden flex items-start gap-space-sm" id="status-invalid">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px] text-error">cancel</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[11px] font-bold w-fit">
+              INVALID OR UNREGISTERED PASS
+            </span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Pass QR hash code does not match any current Hackathon team entry record.</p>
+</div>
+</div>
+</div>
+<!-- Manual Roll Entry Fallback Bar -->
+<div class="mt-3 pt-3 border-t border-inverse-surface/40 flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-primary-container flex items-center justify-between" for="manual-roll-input">
+<span>Manual Fallback Check-in</span>
+<span class="text-secondary-fixed-dim text-[11px]">Emergency Mode</span>
+</label>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined text-[18px] text-outline absolute left-3 top-2.5">badge</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-lowest text-on-surface font-mono text-body-md placeholder:text-outline-variant outline-none focus:ring-2 focus:ring-secondary-container" id="manual-roll-input" placeholder="Roll No (e.g. 21JECRC...)" type="text"/>
+</div>
+<button class="h-10 px-4 rounded-lg bg-secondary-container text-on-secondary font-label-md text-label-md font-semibold hover:opacity-95 active:scale-95 transition-all flex items-center gap-1 shrink-0" onclick="handleManualVerify()">
+<span>Verify</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions Command Bar -->
+<section class="w-full px-margin-sm mt-space-md">
+<div class="flex items-center justify-between mb-2">
+<span class="font-title-md text-title-md font-bold text-on-surface">Coordinator Controls</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Stage 1: Ingress</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="p-space-sm rounded-xl bg-surface-container-lowest text-on-surface shadow-sm hover:bg-surface-container-low transition-all flex flex-col items-center justify-center text-center gap-1 group">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center group-hover:bg-secondary-container group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[20px] text-on-surface group-hover:text-on-secondary">campaign</span>
+</div>
+<span class="font-label-sm text-[12px] font-semibold text-on-surface">Gate Notice</span>
+</button>
+<button class="p-space-sm rounded-xl bg-surface-container-lowest text-on-surface shadow-sm hover:bg-surface-container-low transition-all flex flex-col items-center justify-center text-center gap-1 group">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center group-hover:bg-secondary-container group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[20px] text-on-surface group-hover:text-on-secondary">download</span>
+</div>
+<span class="font-label-sm text-[12px] font-semibold text-on-surface">Export CSV</span>
+</button>
+<button class="p-space-sm rounded-xl bg-surface-container-lowest text-on-surface shadow-sm hover:bg-surface-container-low transition-all flex flex-col items-center justify-center text-center gap-1 group">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</div>
+<span class="font-label-sm text-[12px] font-semibold text-on-surface">New Event</span>
+</button>
+</div>
+</section>
+<!-- Recent Scans Live Stream Feed -->
+<section class="w-full px-margin-sm mt-space-md">
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-secondary">stream</span>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Live Check-in Stream</h3>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Realtime</span>
+</div>
+</div>
+<!-- Live Items Stream -->
+<div class="flex flex-col gap-space-xs" id="live-stream-container">
+<!-- Stream Item 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low/60 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface font-title-md text-[13px] font-bold shrink-0">
+              AV
+            </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold text-on-surface truncate">Aanya Verma</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant font-mono">21JECRC042 • Team Alpha</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 ml-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-[10px] font-semibold">
+              09:42 AM
+            </span>
+<span class="text-secondary font-label-sm text-[10px] font-bold mt-0.5">Checked In</span>
+</div>
+</div>
+<!-- Stream Item 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low/60 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface font-title-md text-[13px] font-bold shrink-0">
+              DK
+            </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold text-on-surface truncate">Devansh Khandelwal</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant font-mono">20JECRC204 • NeuralBytes</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 ml-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-[10px] font-semibold">
+              09:41 AM
+            </span>
+<span class="text-secondary font-label-sm text-[10px] font-bold mt-0.5">Checked In</span>
+</div>
+</div>
+<!-- Stream Item 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low/60 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface font-title-md text-[13px] font-bold shrink-0">
+              PM
+            </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold text-on-surface truncate">Pooja Meena</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant font-mono">22JECRC301 • DevSprint</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 ml-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-[10px] font-semibold">
+              09:39 AM
+            </span>
+<span class="text-secondary font-label-sm text-[10px] font-bold mt-0.5">Checked In</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Attendee Roster Quick Search & University Export -->
+<section class="w-full px-margin-sm mt-space-md mb-space-lg">
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Roster Quick Lookup</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Total: 1,248</span>
+</div>
+<!-- Search Field -->
+<div class="relative w-full mb-3">
+<span class="material-symbols-outlined text-[20px] text-outline absolute left-3 top-2.5">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline-variant outline-none focus:ring-2 focus:ring-secondary-container" placeholder="Search by name, roll, or team code..." type="text"/>
+</div>
+<!-- Export Button -->
+<button class="w-full h-11 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:bg-inverse-surface active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary-container">table_view</span>
+<span>Download Official University Excel/CSV Sheet</span>
+</button>
+</div>
+</section>
+</div>
+<script>
+  function setScanStatus(type) {
+    const successEl = document.getElementById('status-success');
+    const duplicateEl = document.getElementById('status-duplicate');
+    const invalidEl = document.getElementById('status-invalid');
+
+    successEl.classList.add('hidden');
+    duplicateEl.classList.add('hidden');
+    invalidEl.classList.add('hidden');
+
+    if (type === 'success') {
+      successEl.classList.remove('hidden');
+    } else if (type === 'duplicate') {
+      duplicateEl.classList.remove('hidden');
+    } else if (type === 'invalid') {
+      invalidEl.classList.remove('hidden');
+    }
+  }
+
+  function toggleTorch() {
+    const icon = document.getElementById('torch-icon');
+    const btn = document.getElementById('torch-btn');
+    if (icon.innerText === 'flash_on') {
+      icon.innerText = 'flash_off';
+      btn.classList.add('bg-secondary-container');
+    } else {
+      icon.innerText = 'flash_on';
+      btn.classList.remove('bg-secondary-container');
+    }
+  }
+
+  function handleManualVerify() {
+    const input = document.getElementById('manual-roll-input');
+    if (!input.value.trim()) {
+      input.focus();
+      return;
+    }
+    setScanStatus('success');
+    input.value = '';
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-primary-container/95 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.16)]" data-active-classes="text-secondary-container font-semibold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[24px]">explore</span><span class="font-label-sm text-label-sm">Discover</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="event-details" href="#"><span class="material-symbols-outlined text-[24px]">terminal</span><span class="font-label-sm text-label-sm">Hackathon</span></a><a class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl text-on-primary-container hover:text-on-primary transition-colors" data-path="my-passes" href="#"><span class="material-symbols-outlined text-[24px]">confirmation_number</span><span class="font-label-sm text-label-sm">Passes</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-xs min-w-[56px] min-h-[44px] px-space-xs py-1 rounded-xl transition-colors text-secondary-container font-semibold" data-path="admin-gate" href="#"><span class="material-symbols-outlined text-[24px]">qr_code_scanner</span><span class="font-label-sm text-label-sm">Gate Scanner</span></a></div></nav></body></html>
